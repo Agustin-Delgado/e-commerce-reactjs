@@ -1,0 +1,109 @@
+.header{
+    height: 80px;
+    background: linear-gradient(90deg, #15a2cb 15%, #e02aff 100%);
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+
+    &-logo{
+        width: 150px;
+        height: auto;
+        cursor: pointer;
+    }
+
+    &__form{
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        border-bottom-left-radius: 50px;
+        border-top-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border-top-right-radius: 50px;
+        transition: 200ms ease-in-out;
+
+        &-search{
+            border: 1px solid $black;
+            height: 39px;
+            width: 600px;
+            border: 0 rgba(0,0,0,0.2);
+            border-bottom-left-radius: 50px;
+            border-top-left-radius: 50px;
+            padding: 10px 15px;
+            outline: none;
+            
+            &::placeholder
+            {
+                color: rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        &-submit{
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 39px;
+            width: 39px;
+            cursor: pointer;
+            border-bottom-right-radius: 50px;
+            border-top-right-radius: 50px;
+            background-color: $white;
+
+            svg{
+                color: $blue;
+                width: 50%;
+                height: auto;
+                margin-right: 15px;
+                transition: 200ms ease-in-out;
+
+                
+                &:hover
+                {
+                    color: $pink;
+                }
+            }
+        }
+    }
+
+    &__navbar{
+
+        &-list{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+
+            &-item{
+                padding: 15px 15px;
+
+                &-title
+                {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    align-content: center;
+                    flex-direction: row;
+                    color: $white;
+                    transition: 200ms ease-in-out;
+                    border-bottom: 2px solid transparent;
+                    padding-bottom: 5px;
+                    position: relative;
+                    cursor: pointer;
+
+                    svg
+                    {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
