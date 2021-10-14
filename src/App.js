@@ -1,10 +1,11 @@
+import NavBar from './components/NavBar';
 import './sass/style.css';
-import Header from './components/Header';
+
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <NavBar/>
     </div>
   );
 }
