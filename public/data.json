@@ -1,5 +1,5 @@
 [
-{"id": "0","img": require("../../public/productos/p1.webp"),  "nombre": "Monitor Led 19 Pulgadas", "precio": 15999, "categoria": "TECNOLOGIA", "descripcion": "Monitor Led 19 Pulgadas Iqual Iq19 Hd+ Vga Hdmi Gtia Promo", "favoritos": false, "stock": 10, "cantidad":1},
+{"id": "0","img": "../../public/productos/p1.webp",  "nombre": "Monitor Led 19 Pulgadas", "precio": 15999, "categoria": "TECNOLOGIA", "descripcion": "Monitor Led 19 Pulgadas Iqual Iq19 Hd+ Vga Hdmi Gtia Promo", "favoritos": false, "stock": 10, "cantidad":1},
 {"id": "1","img": "../src/img/productos/p2.webp", "nombre": "Mochila Tactica", "precio": 3298, "categoria": "ACCESORIOS", "descripcion": "Mochila Tactica Asalto Militar 30 Lts Trekking Reforzada", "favoritos": false, "stock": 10, "cantidad":1},
 {"id": "2","img": "../src/img/productos/p3.webp", "nombre": "Mouse de juego Logitech", "precio": 7899, "categoria": "TECNOLOGIA", "descripcion": "Mouse de juego Logitech G Series Hero 16K G502 negro", "favoritos": false, "stock": 10, "cantidad":1},
 {"id": "3","img": "../src/img/productos/p4.webp", "nombre": "Silla Sillón Gamer", "precio": 29999, "categoria": "MUEBLES", "descripcion": "Silla Sillón Gamer Pro E-sports Ergonómica Ajustable Lumbar", "favoritos": false, "stock": 10, "cantidad":1},
