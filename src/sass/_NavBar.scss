@@ -8,6 +8,7 @@
     align-content: center;
     justify-content: space-around;
     align-items: center;
+    z-index: 2;
 
     &-logo{
         width: 150px;
@@ -84,8 +85,7 @@
             &-item{
                 padding: 15px 15px;
 
-                &-title
-                {
+                &-title{
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -98,8 +98,14 @@
                     position: relative;
                     cursor: pointer;
 
-                    svg
-                    {
+                    &-counter{
+                        position: absolute;
+                        right: -6px;
+                        top: -15px;
+                        font-size: 13px;
+                    }
+
+                    svg{
                         margin-left: 5px;
                     }
                 }
