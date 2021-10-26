@@ -6,18 +6,18 @@ const onAdd =(count)=>{
     console.log(`Cantidad seleccionada: ${count}`)
 }
 
-function Item({identificador, img, nombre, precio, categoria, descripcion, favoritos, stock, cantidad}) {
+function Item({id, img, nombre, precio, categoria, descripcion, favoritos, stock, cantidad}) {
 
     const [show, toggleShow] = useState(false)
 
     return (
         <>
-            <div key={identificador} className="productos__row-card">
+            <div key={id} className="productos__row-card">
 
                 <h2 className="productos__row-card-title">{nombre}</h2>
-                <img className="productos__row-card-img" src={img} alt="" />
+                <img className="productos__row-card-img" src={`${img}`} alt="" />
                 <span className="productos__row-card-price">{`$${precio}`}</span>
-                <p className="productos__row-card-description">{descripcion}</p>
+                {!show && <p className="productos__row-card-description">{descripcion}</p>}
                 {show && <ItemCount stock="5" onAdd={onAdd} />}
 
                 <div className="productos__row-card-buy">

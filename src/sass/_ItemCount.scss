@@ -4,12 +4,13 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    margin-top: 5px;
 
     &-apply{
         border-radius: 10px;
-        margin-top: 10px;
+        margin-top: 5px;
         cursor: pointer;
-        padding: 7px 15px;
+        padding: 3px 10px;
         color: $blue;
         background-color: $white;
         transition: 200ms ease-in-out;

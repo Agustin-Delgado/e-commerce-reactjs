@@ -3,13 +3,10 @@ import ItemList from "./ItemList"
 
 function ItemListContainer ({titulo}){
 
-
     const [items, setItems] = useState([])
-    console.log(items)
-
 
     const getItems = async() => {
-        const data = await fetch("https://raw.githubusercontent.com/Agustin-Delgado/r-commerce/master/productos.json")
+        const data = await fetch("https://raw.githubusercontent.com/Agustin-Delgado/r-commerce/master/public/data.json")
         const dataItems = await data.json()
         setItems(dataItems)
     } 
