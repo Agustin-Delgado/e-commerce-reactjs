@@ -395,13 +395,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 5px;
 }
 
 .productos__row-card-buy-quantity-container-apply {
   border-radius: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
   cursor: pointer;
-  padding: 7px 15px;
+  padding: 3px 10px;
   color: #4aabff;
   background-color: #fff;
   -webkit-transition: 200ms ease-in-out;
