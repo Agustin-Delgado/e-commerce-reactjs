@@ -1,20 +1,20 @@
 import { useState } from "react"
 
-function ItemCount ({stock, onAdd}) {
+function ItemCount ({initial, stock, onAdd}) {
 
-    const [count, setCount] = useState(1)
+    const [count, setCount] = useState(initial)
 
     const handlerAdd =()=>{
         if(count < stock) setCount(count + 1)    
     }
 
     const handlerRm =()=>{
-        if(count > 1) setCount(count - 1)
+        if(count > initial) setCount(count - 1)
     }   
 
     const handlerOnAdd=()=>{
         onAdd(count)
-        setCount(1)
+        setCount(initial)
     }
 
 
