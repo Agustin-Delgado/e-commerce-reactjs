@@ -1,0 +1,26 @@
+.product__detail{
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    padding: 6% 3%;
+    background-color: aqua;
+    border-radius: 8px;
+
+    &-b1{
+
+        margin: 10px 100px;
+    }
+
+    &-b2{
+
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+}
