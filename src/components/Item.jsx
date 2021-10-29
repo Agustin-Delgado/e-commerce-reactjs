@@ -18,7 +18,7 @@ function Item({id, img, nombre, precio, categoria, descripcion, favoritos, stock
                 <img className="productos__row-card-img" src={`${img}`} alt="" />
                 <span className="productos__row-card-price">{`$${precio}`}</span>
                 {!show && <p className="productos__row-card-description">{descripcion}</p>}
-                {show && <ItemCount stock="5" onAdd={onAdd} />}
+                {show && <ItemCount initial={1} stock={5} onAdd={onAdd} />}
 
                 <div className="productos__row-card-buy">
 

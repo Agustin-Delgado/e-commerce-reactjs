@@ -24,10 +24,10 @@ function ItemListContainer ({titulo}){
                 
                 <h1 className="productos-title">{titulo}</h1>
                 <div className="productos__row">
-                { loading ? <div className="lds-dual-ring"></div> :
+                { 
+                    loading ? <div className="lds-dual-ring"></div> :
 
                     <ItemList productos={items}/>
-
                 }
 
                 </div>
