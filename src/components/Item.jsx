@@ -1,21 +1,33 @@
+import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount"
 import { useState } from "react";
 
-const onAdd =(count)=>{
+const onAdd = (count) => {
 
     console.log(`Cantidad seleccionada: ${count}`)
 }
 
-function Item({id, img, nombre, precio, categoria, descripcion, favoritos, stock, cantidad}) {
+function Item({ id, img, nombre, precio, categoria, descripcion, favoritos, stock, cantidad }) {
 
     const [show, toggleShow] = useState(false)
 
     return (
         <>
-            <div key={id} className="productos__row-card">
 
-                <h2 className="productos__row-card-title">{nombre}</h2>
-                <img className="productos__row-card-img" src={`${img}`} alt="" />
+            <div id={`${id}`} className="productos__row-card">
+
+                <Link to={`/detalle/${id}`}>
+
+                    <h2 className="productos__row-card-title">{nombre}</h2>
+
+                </Link>
+
+                <Link to={`/detalle/${id}`}>
+
+                    <img className="productos__row-card-img" src={`${img}`} alt="" />
+
+                </Link>
+
                 <span className="productos__row-card-price">{`$${precio}`}</span>
                 {!show && <p className="productos__row-card-description">{descripcion}</p>}
                 {show && <ItemCount initial={1} stock={5} onAdd={onAdd} />}
@@ -36,6 +48,7 @@ function Item({id, img, nombre, precio, categoria, descripcion, favoritos, stock
                 </div>
 
             </div>
+
         </>
     )
 }
