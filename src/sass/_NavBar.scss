@@ -84,6 +84,35 @@
 
             &-item{
                 padding: 15px 15px;
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+                align-content: center;
+                align-items: flex-start;
+
+                &-categoria{
+                    display: flex;
+                    flex-direction: column;
+                    align-content: center;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    width: 220px;
+                    top: 70px;
+                    height: 200px;
+                    background-color: $white;
+                    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+                    border-radius: 8px;
+
+                    &-list{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                        align-items: center;
+                        height: 100%;
+                        align-content: center;
+                    }
+                }
 
                 &-title{
                     display: flex;
