@@ -1,3 +1,12 @@
+![E-Commerce con react](https://raw.githack.com/Agustin-Delgado/r-commerce/master/src/img/logoWhite.png)
+
+# E-Commerce con react
+## _E-Commerce usando React-Js de productos en general._
+
+## Objetivos
+
+>El objetivo de este proyecto es crear un E-Commerce siguiendo los paramentros establecidos por Coderhouse, el mismo utiliza React como base y se podra simular la compra de productos, asi como tambien agregar a favoritos, tener control de las compras realizadas, buscador de productos, carrito, categorias y demás funciones básicas de una tienda electrónica
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
