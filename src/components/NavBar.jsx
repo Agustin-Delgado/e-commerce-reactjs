@@ -89,7 +89,11 @@ function NavBar() {
 
                     <li className="header__navbar-list-item">
 
-                        <CartWidget />
+                        <Link to={`/cart`}>
+
+                            <CartWidget />
+
+                        </Link>
 
                     </li>
 

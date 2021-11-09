@@ -36,7 +36,7 @@ function ItemDetailContainer() {
                 {
                     loading ? <div className="lds-dual-ring"></div> :
 
-                        <ItemDetail nombre={detail.nombre} img={detail.img} precio={detail.precio} descripcion={detail.descripcion} stock={detail.stock} />
+                        <ItemDetail id={detail.id} nombre={detail.nombre} img={detail.img} precio={detail.precio} descripcion={detail.descripcion} stock={detail.stock} />
                 }
 
             </div>
