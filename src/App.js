@@ -1,7 +1,9 @@
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import Cart from './components/Cart';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import ItemListContainer from './components/ItemListContainer';
 import NavBar from './components/NavBar';
+import CartContextProvider from './context/CartContext';
 import './sass/style.css';
 
 function App() {
@@ -9,6 +11,7 @@ function App() {
   return (
     <div className="App">
 
+      <CartContextProvider>
         <BrowserRouter>
           <NavBar/>
           <Switch>
@@ -17,10 +20,13 @@ function App() {
             </Route>
             <Route exact path="/categoria/:categoriaId" component={ItemListContainer}/>
             <Route exact path="/detalle/:detalleId" component={ItemDetailContainer}/>
+            <Route exact path="/cart" component={Cart}/>
           </Switch>
         </BrowserRouter>
+      </CartContextProvider>
+
     </div>
-  );
+  )
 }
 
 export default App;
