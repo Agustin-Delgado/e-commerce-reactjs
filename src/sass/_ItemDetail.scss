@@ -94,7 +94,7 @@
                 }
             }
 
-            .bi-heart {
+            svg {
                 color: $blue;
                 transition: 200ms ease-in-out;
                 cursor: pointer;
@@ -115,13 +115,6 @@
         &-price{
             font-size: 2rem;
             margin-bottom: 30px;
-        }
-
-        &-stock{
-            font-size: 2rem;
-            margin-bottom: 50px;
-            margin-top: 10px;
-            text-align: center;
         }
 
         &-description{
