@@ -26,14 +26,31 @@ const CartContextProvider = ({children}) => {
     function addToFav (items) {
         setFavList ([...favList, items])
     }
- 
-    const showList = () => {
-        console.log(cartList)
+
+    function deleteItem (id) {
+        setCartList(cartList.filter(prod => prod.id !== id))
     }
+
+    const totalPrice = () => {
+        return cartList.reduce((sum, value) => (sum + (value.precio * value.cantidad)), 0)
+    }
+
+    const cartCounter = () => {
+        return cartList.reduce((sum, value) => (sum + value.cantidad), 0)
+    }
+
+    const isInFav = (id) => {
+        return favList.some(prod => prod.id == id)
+    }
+
+    function deleteFav (id) {
+        setFavList(favList.filter(prod => prod.id !== id))
+    }
+
 
     return (
         <>
-            <CartContext.Provider value={{cartList, showList, addToCart, addToFav, favList}}>
+            <CartContext.Provider value={{cartList, deleteFav, addToCart, addToFav, favList, deleteItem, totalPrice, cartCounter, isInFav}}>
 
                 {children}
 

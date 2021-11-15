@@ -6,17 +6,15 @@ function ItemDetail({ id, img, precio, descripcion, stock, nombre }) {
     const { addToCart, cartList, addToFav, favList } = useCartContext()
 
     const onAdd = (cantidad) => {
-
         alert(`Cantidad seleccionada: ${cantidad}`)
-        addToCart({ id, img, precio, descripcion, stock, nombre, cantidad })
+        addToCart({ id, img, precio, descripcion, stock, nombre, cantidad})
     }
 
     const onFav = (state) => {
-        console.log(state)
         state ? 
             addToFav({ id, img, precio, descripcion, stock, nombre }) 
             : 
-            console.log('no anadido')
+            console.log(favList)
             const i = favList.findIndex(p => p === { id, img, precio, descripcion, stock, nombre })
             favList.splice(i, 1)
     }
@@ -42,7 +40,7 @@ function ItemDetail({ id, img, precio, descripcion, stock, nombre }) {
                     <p className="product__detail-b2-description-text">{descripcion}</p>
                 </div>
                 
-                <ItemCount onFav={onFav} initial={1} stock={stock} onAdd={onAdd} />
+                <ItemCount id={id} onFav={onFav} initial={1} stock={stock} onAdd={onAdd} />
 
             </div>
 

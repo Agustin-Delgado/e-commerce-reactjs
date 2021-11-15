@@ -20,7 +20,7 @@
         box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
         transition: 200ms ease-in-out;
         width: 250px;
-        min-height: 350px;
+        height: 400px;
         z-index: 0;
         
         a{
@@ -33,12 +33,29 @@
             h2 {
                 font-size: 1rem;
                 text-align: center;
+                margin-bottom: 20px;
             }
     
             img {
                 padding: 5px 5px;
-                max-width: 215px;
-                max-height: 215px;
+                width: 215px;
+                height: 215px;
+                object-fit: contain;
+                margin-bottom: 20px;
+            }
+        }
+
+        svg {
+            position: absolute;
+            width: 20px;
+            top: 314px;
+            right: 25px;
+            color: $blue;
+            transition: 200ms ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                color: $pink;
             }
         }
 
@@ -49,13 +66,15 @@
         }
 
         &-description {
-            display: none;
+            opacity: 0;
+            visibility: hidden;
             text-align: center;
-            position: absolute;
             margin-top: 10px;
             color: rgba(0, 0, 0, 0.6);
             font-size: 1rem;
-            top: 330px;
+            transition: 100ms ease-in-out;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         &-buy {
@@ -97,7 +116,7 @@
                 }
             }
 
-            .bi-heart {
+            svg {
                 color: $blue;
                 transition: 200ms ease-in-out;
                 cursor: pointer;
@@ -110,27 +129,13 @@
         &:hover {
             transform: scale(1.02);
             box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+            height: 450px;
 
             .productos__row-card-description {
-                display: block;
-                max-width: 250px;
+                visibility: visible;
+                opacity: 1;
                 background-color: $white;
-                box-shadow: 0px 20px 15px 0px rgba(0, 0, 0, 0.15);
-                overflow-y: scroll;
-                max-height: 45px;
-            }
-
-            .productos__row-card-buy {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                align-content: center;
-                width: 100%;
-                background-color: $white;
-                padding: 13px 0;
-                box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
-                border-radius: 5px;
+                padding: 5px 20px;
             }
         }
     }
