@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
+import { getFirestore } from "../services/getFirestore"
 import ItemDetail from "./ItemDetail"
 
 function ItemDetailContainer() {
@@ -10,22 +11,14 @@ function ItemDetailContainer() {
 
     useEffect(() => {
 
-        const getItem = async () => {
-
-            const data = await fetch("https://raw.githubusercontent.com/Agustin-Delgado/r-commerce/master/public/data.json")
+        const db = getFirestore()
+        const dbQuery = db.collection('productos').where('id', '==', detalleId)
+        dbQuery.get()
+            .then(resp => setDetail(resp.docs.map(prod => prod.data())))
             .finally(() => setLoading(false))
-            const dataItems = await data.json()
-            console.log(dataItems);
-            setDetail(dataItems.find(prod => prod.id === detalleId))
-        }
 
-        setTimeout(() =>
-
-            getItem(), 2000)
-            
     }, [detalleId])
 
-    console.log(detail);
 
     return <>
 
@@ -36,7 +29,11 @@ function ItemDetailContainer() {
                 {
                     loading ? <div className="lds-dual-ring"></div> :
 
-                        <ItemDetail id={detail.id} nombre={detail.nombre} img={detail.img} precio={detail.precio} descripcion={detail.descripcion} stock={detail.stock} />
+                        detail.map(detail =>
+
+                            <ItemDetail id={detail.id} nombre={detail.nombre} img={detail.img} precio={detail.precio} descripcion={detail.descripcion} stock={detail.stock} favoritos={detail.favoritos} />
+
+                    )
                 }
 
             </div>

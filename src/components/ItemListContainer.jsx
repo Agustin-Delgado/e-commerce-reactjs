@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom";
+import { getFirestore } from "../services/getFirestore";
 import ItemList from "./ItemList"
 
 function ItemListContainer() {
@@ -10,27 +11,24 @@ function ItemListContainer() {
 
     useEffect(() => {
 
-        const getItems = async () => {
+        if (categoriaId) {
 
-            if (categoriaId) {
-
-                const data = await fetch("https://raw.githubusercontent.com/Agustin-Delgado/r-commerce/master/public/data.json")
+            const db = getFirestore()
+            const dbQuery = db.collection('productos').where('categoria', '==', categoriaId)
+            dbQuery.get()
+                .then(resp => setItems(resp.docs.map(prod => prod.data())))
                 .finally(() => setLoading(false))
-                const dataItems = await data.json()
-                setItems(dataItems.filter(prod => prod.categoria === categoriaId))
-            }
-            else {
-
-                const data = await fetch("https://raw.githubusercontent.com/Agustin-Delgado/r-commerce/master/public/data.json")
-                .finally(() => setLoading(false))
-                const dataItems = await data.json()
-                setItems(dataItems)
-            }
-
         }
-        setTimeout(() => getItems(), 2000)
-        
+        else {
+            const db = getFirestore()
+            const dbQuery = db.collection('productos').get()
+            dbQuery
+                .then(resp => setItems(resp.docs.map(prod => prod.data())))
+                .finally(() => setLoading(false))
+        }
+
     }, [categoriaId])
+
 
     return (
         <>

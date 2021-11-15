@@ -1,9 +1,14 @@
 import { useState } from "react"
 
-function ItemCount({ initial, stock, onAdd, onFav }) {
+import { useCartContext } from "../context/CartContext"
+
+function ItemCount({ initial, stock, onAdd, onFav, id}) {
+
+    const { isInFav } = useCartContext()
 
     const [quantity, setQuantity] = useState(initial)
-    const [fillHeart, setFillHeart] = useState(false)
+
+    const [fillHeart, setFillHeart] = useState(isInFav(id))
 
     const handlerAdd = () => {
         if (quantity < stock) setQuantity(quantity + 1)
