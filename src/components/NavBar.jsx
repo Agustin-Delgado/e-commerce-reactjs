@@ -107,28 +107,48 @@ function NavBar() {
 
                                     favList.map(prod =>
 
-                                        <Link to={`/detalle/${prod.id}`}>
+                                        <div className="header__navbar-list-item-favoritos-contains">
 
-                                            <div className="header__navbar-list-item-favoritos-contains">
+                                            <Link to={`/detalle/${prod.id}`}>
 
                                                 <img className="header__navbar-list-item-favoritos-contains-img" src={prod.img} alt="" />
+                                            </Link>
 
-                                                <div className="header__navbar-list-item-favoritos-contains-text">
+                                            <div className="header__navbar-list-item-favoritos-contains-text">
+
+                                                <Link to={`/detalle/${prod.id}`}>
 
                                                     <h3 className="header__navbar-list-item-favoritos-contains-text-title">{prod.nombre}</h3>
-                                                    <span className="header__navbar-list-item-favoritos-contains-text-price">${prod.precio}</span>
 
-                                                </div>
+                                                    {
+                                                        prod.oferta ?
 
-                                                <div className="header__navbar-list-item-favoritos-contains-options">
+                                                            <div className="header__navbar-list-item-favoritos-contains-text-off">   
 
-                                                    <a onClick={() => deleteFav(prod.id)} className="header__navbar-list-item-favoritos-contains-options-delete">Eliminar</a>
+                                                                <span className="header__navbar-list-item-favoritos-contains-text-off-price">${prod.precio - ((prod.precio * prod.oferta) / 100)}</span>
+                                                                <span className="header__navbar-list-item-favoritos-contains-text-off-title">{prod.oferta}% OFF</span>
 
-                                                </div>
+                                                            </div>
+
+
+                                                            :
+
+                                                            <span className="header__navbar-list-item-favoritos-contains-text-price">${prod.precio}</span>
+                                                    }
+
+                                                </Link>
 
                                             </div>
 
-                                        </Link>
+                                            <div className="header__navbar-list-item-favoritos-contains-options">
+
+                                                <a onClick={() => deleteFav(prod.id)} className="header__navbar-list-item-favoritos-contains-options-delete">Eliminar</a>
+
+                                            </div>
+
+                                        </div>
+
+
                                     )
                                 }
 

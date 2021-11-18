@@ -43,6 +43,21 @@ function ItemListContainer() {
                     }
 
                 </div>
+            
+            </section>
+
+            <section className="productos">
+
+            <h2 className="productos-title">Ofertas</h2>
+
+                <div className="productos__row">
+                    
+
+                    {
+                        <ItemList productos={items.filter(prod => prod.oferta > 0)} />
+                    }
+
+                </div>
 
             </section>
         </>

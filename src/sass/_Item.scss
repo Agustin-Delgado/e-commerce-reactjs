@@ -34,6 +34,9 @@
                 font-size: 1rem;
                 text-align: center;
                 margin-bottom: 20px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
             }
     
             img {
@@ -59,6 +62,24 @@
             }
         }
 
+        &-off {
+
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+
+            &-title{
+                color: $green;
+            }
+
+            &-oldprice {
+                text-decoration: line-through;
+                display: none;
+                color: rgba(0, 0, 0, 0.6);
+            }
+        }
 
         &-price {
             font-size: 1.5rem;
@@ -136,6 +157,9 @@
                 opacity: 1;
                 background-color: $white;
                 padding: 5px 20px;
+            }
+            .productos__row-card-off-oldprice{
+                display: block;
             }
         }
     }

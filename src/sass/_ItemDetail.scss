@@ -112,6 +112,28 @@
             text-align: center;
         }
 
+        &-off{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            align-content: center;
+
+            &-title{
+                height: fit-content;
+                padding: 5px 5px;
+            }
+
+            div{
+                display: flex;
+            }
+
+            &-oldprice{
+                color: rgba(255, 255, 255, 0.55);
+                text-decoration: line-through;
+            }
+        }
+
         &-price{
             font-size: 2rem;
             margin-bottom: 30px;

@@ -4,6 +4,7 @@ import ItemDetailContainer from './components/ItemDetailContainer';
 import ItemListContainer from './components/ItemListContainer';
 import NavBar from './components/NavBar';
 import CartContextProvider from './context/CartContext';
+import Checkout from './components/Checkout';
 import './sass/style.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/categoria/:categoriaId" component={ItemListContainer}/>
             <Route exact path="/detalle/:detalleId" component={ItemDetailContainer}/>
             <Route exact path="/cart" component={Cart}/>
+            <Route exact path="/checkout" component={Checkout}/>
           </Switch>
         </BrowserRouter>
       </CartContextProvider>

@@ -2,17 +2,19 @@ import { Link } from "react-router-dom";
 import { useCartContext } from "../context/CartContext"
 import { useState } from "react";
 
-function Item({ id, img, nombre, precio, categoria, descripcion, favoritos, stock, cantidad }) {
+function Item({ id, img, nombre, precio, categoria, descripcion, favoritos, stock, cantidad, oferta }) {
+
+    console.log(oferta)
 
     const { isInFav, addToFav, favList } = useCartContext()
     const [fillHeart, setFillHeart] = useState(isInFav(id))
 
     const onFav = (state) => {
         state ? 
-            addToFav({ id, img, precio, descripcion, stock, nombre }) 
+            addToFav({ id, img, precio, descripcion, stock, nombre, oferta }) 
             : 
             console.log(favList)
-            const i = favList.findIndex(p => p === { id, img, precio, descripcion, stock, nombre })
+            const i = favList.findIndex(p => p === { id, img, precio, descripcion, stock, nombre, oferta })
             favList.splice(i, 1)
     }
 
@@ -55,7 +57,24 @@ function Item({ id, img, nombre, precio, categoria, descripcion, favoritos, stoc
 
                 </Link>
 
-                <span className="productos__row-card-price">{`$${precio}`}</span>
+                {
+                    oferta ?
+
+                    <div className="productos__row-card-off">
+
+                        <span className="productos__row-card-off-oldprice">{`$${precio}`}</span>
+
+                        <span className="productos__row-card-price">{`$${precio-((precio*oferta)/100)}`}</span>
+
+                        <span className="productos__row-card-off-title">{oferta}% OFF</span>
+
+                    </div>
+
+                :
+
+                    <span className="productos__row-card-price">{`$${precio}`}</span>
+                }
+
                 <p className="productos__row-card-description">{descripcion}</p>
 
             </div>

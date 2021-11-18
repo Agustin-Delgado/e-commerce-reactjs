@@ -31,7 +31,7 @@ function ItemDetailContainer() {
 
                         detail.map(detail =>
 
-                            <ItemDetail id={detail.id} nombre={detail.nombre} img={detail.img} precio={detail.precio} descripcion={detail.descripcion} stock={detail.stock} favoritos={detail.favoritos} />
+                            <ItemDetail id={detail.id} nombre={detail.nombre} img={detail.img} precio={detail.precio} descripcion={detail.descripcion} stock={detail.stock} favoritos={detail.favoritos} oferta = {detail.oferta} />
 
                     )
                 }

@@ -24,7 +24,13 @@ const CartContextProvider = ({children}) => {
     }
 
     function addToFav (items) {
-        setFavList ([...favList, items])
+
+        if (favList.find(p => p.id === items.id)) {
+            setFavList ([...favList])
+
+        }else{
+            setFavList ([...favList, items])
+        }
     }
 
     function deleteItem (id) {
