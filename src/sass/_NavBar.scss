@@ -162,7 +162,17 @@
 
                         &-text
                         {
-                            max-width: 116px;
+                            max-width: 120px;
+
+                            &-off{
+                                display: flex;
+
+                                &-title{
+                                    color: $green;
+                                    font-size: 0.7rem;
+                                    margin-left: 5px;
+                                }
+                            }
 
                             &-title
                             {

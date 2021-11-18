@@ -33,7 +33,7 @@ function Cart() {
                 <div className="carrito__contain">
 
                     <div className="carrito__contain-buy">
-                        <a href="#/" className="carrito__contain-buy-button">Continuar con la compra</a>
+                        <Link to="checkout" className="carrito__contain-buy-button">Continuar con la compra</Link>
                         <h3 id="total" className="carrito__contain-buy-title">Total: ${totalPrice()}</h3>
                     </div>
                     {
