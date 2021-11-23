@@ -1,8 +1,97 @@
 import { useCartContext } from "../context/CartContext"
+import { useParams } from "react-router"
+import { useEffect, useState } from "react"
+import { getFirestore } from "../services/getFirestore"
+import firebase from "firebase"
+import { useHistory } from "react-router"
 
 function Checkout() {
 
-    const { cartList, totalPrice } = useCartContext()
+    const history = useHistory()
+    const [order, setOrder] = useState('')
+    const { cartList, totalPrice, clearCart } = useCartContext()
+    const { checkoutId } = useParams()
+    const [checkout, setCheckout] = useState([])
+    const [formData, setFormData] = useState({ name: "", phone: "", email: "", doc: "" })
+
+
+    useEffect(() => {
+
+        if (checkoutId) {
+
+            const db = getFirestore()
+            const dbQuery = db.collection('productos').where('id', '==', checkoutId)
+            dbQuery.get()
+                .then(resp => setCheckout(resp.docs.map(prod => prod.data())))
+        }
+        else {
+
+            setCheckout(cartList)
+        }
+
+    }, [checkoutId])
+
+
+    const generarOrden = (e) => {
+
+        e.preventDefault()
+
+        let orden = {}
+        orden.date = firebase.firestore.Timestamp.fromDate(new Date())
+        orden.buyer = formData
+        orden.total = totalPrice()
+        orden.items = checkout.map(prod => {
+            const id = prod.id
+            const nombre = prod.nombre
+            const precio = prod.precio
+            const cantidad = prod.cantidad
+
+            return { id, nombre, precio, cantidad }
+        })
+
+        const dbQuery = getFirestore()
+        dbQuery.collection('orders').add(orden)
+            .then(resp => setOrder(resp.id))
+            /*             .finally(() => history.push(`/checkout/${idOrder}`)) */
+            .finally(clearCart())
+
+
+        const itemsToUpdate = dbQuery.collection('productos').where(
+            firebase.firestore.FieldPath.documentId(), 'in', checkout.map(i => i.id)
+        )
+
+        const batch = dbQuery.batch()
+
+        itemsToUpdate.get()
+            .then(collection => {
+                collection.docs.forEach(docSnapshot => {
+                    batch.update(docSnapshot.ref, {
+                        stock: docSnapshot.data().stock - checkout.find(item => item.id === docSnapshot.id).cantidad
+                    })
+                })
+
+                batch.commit()
+
+            })
+    }
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    useEffect(() => {
+
+        if (order) {
+
+            return history.push(`/checkout/purchased/${order}`)
+
+        }
+
+    }, [order])
+
 
     return <>
 
@@ -74,22 +163,9 @@ function Checkout() {
                         </div>
                     </div>
                 </div>
-                <div class="checkout__contain-content-dni">
-                    <div class="checkout__contain-content-dni-flip">
-                        <div class="checkout__contain-content-dni-flip-front">
-                            <div class="checkout__contain-content-dni-flip-front-chip"></div>
-                            <div class="checkout__contain-content-dni-flip-front-holder">
-                                <label>Nombre y apellido</label>
-                                <div></div>
-                            </div>
-                            <div class="checkout__contain-content-dni-flip-front-expiration">
-                                <label>Numero de documento</label>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <form class="checkout__contain-content-form">
+
+                <form onSubmit={generarOrden} onChange={handleChange} class="checkout__contain-content-form">
+
                     <fieldset>
                         <label for="card-number">Número de tarjeta</label>
                         <input type="num" id="card-number" class="input-cart-number" maxlength="4" />
@@ -99,7 +175,7 @@ function Checkout() {
                     </fieldset>
                     <fieldset>
                         <label for="card-holder">Nombre y apellido del titular</label>
-                        <input type="text" id="card-holder" />
+                        <input defaultValue={formData.name} name='name' type="text" id="card-holder" />
                     </fieldset>
                     <fieldset class="fieldset-expiration">
                         <label for="card-expiration-month">Fecha de expiración</label>
@@ -140,61 +216,50 @@ function Checkout() {
                         <label for="card-ccv">CVV</label>
                         <input type="text" id="card-ccv" maxlength="3" />
                     </fieldset>
-                </form>
-                <form class="checkout__contain-content-form-two">
                     <div class="double-fieldset">
                         <fieldset>
                             <label>Número de documento</label>
-                            <input id="dni-number" type="num" class="input-dni-number" maxlength="10" />
+                            <input defaultValue={formData.doc} name="doc" id="dni-number" type="num" class="input-dni-number" maxlength="10" />
                         </fieldset>
                         <fieldset>
                             <label for="">Numero de telefono</label>
-                            <input id="tel-number" type="text" name="" />
+                            <input defaultValue={formData.phone} name='phone' id="tel-number" type="text" />
                         </fieldset>
                     </div>
                     <fieldset>
                         <label for="">Correo electronico</label>
-                        <input id="email-text" type="text" name="" />
+                        <input defaultValue={formData.email} name='email' id="email-text" type="text" />
                     </fieldset>
-                </form>
-                <div class="checkout__contain-content-button">
-                    <a id="nextButton" class="checkout__contain-content-button-next">Siguiente</a>
 
-                    <div id="formError">
+                    <div class="checkout__contain-content-button">
 
-                        <svg class="productos__row-card-buy-quantity-container-error-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-lg" viewBox="0 0 16 16">
-                            <path d="M6.002 14a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm.195-12.01a1.81 1.81 0 1 1 3.602 0l-.701 7.015a1.105 1.105 0 0 1-2.2 0l-.7-7.015z" />
-                        </svg>
-                        <span class="productos__row-card-buy-quantity-container-error-text">Verificar datos</span>
+                        <button class="checkout__contain-content-button-next">Finalizar compra</button>
 
                     </div>
 
-                    <a id="backButton" class="checkout__contain-content-button-back">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-arrow-left" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z">
-                            </path>
-                        </svg>
-                        Volver
-                    </a>
-                </div>
+                </form>
+
             </div>
+
             <div class="checkout__contain-details">
                 <h2 class="checkout__contain-details-title">Detalle de la compra</h2>
+
                 {
-                    cartList.map(prod =>
+                    checkout.map(prod =>
 
                         <div class="checkout__contain-details-content">
                             <img class="checkout__contain-details-content-img" src={prod.img}
-                                alt=""/>
-                            <h3 class ="checkout__contain-details-content-title">{prod.nombre}</h3>
-                            <span class ="checkout__contain-details-content-subtotal">Subtotal: ${prod.precio * prod.cantidad}</span>
+                                alt="" />
+                            <h3 class="checkout__contain-details-content-title">{prod.nombre}</h3>
+                            <span class="checkout__contain-details-content-quantity">Cantidad: {prod.cantidad}</span>
+                            <span class="checkout__contain-details-content-subtotal">Subtotal: ${prod.precio * prod.cantidad}</span>
+
                         </div >
                     )
                 }
+
                 <h3 class="checkout__contain-details-total-title">Total: ${totalPrice()}</h3>
+
             </div>
         </div>
 
