@@ -52,11 +52,15 @@ const CartContextProvider = ({children}) => {
     function deleteFav (id) {
         setFavList(favList.filter(prod => prod.id !== id))
     }
+    
+    function clearCart() {
+        setCartList([])
+    }
 
 
     return (
         <>
-            <CartContext.Provider value={{cartList, deleteFav, addToCart, addToFav, favList, deleteItem, totalPrice, cartCounter, isInFav}}>
+            <CartContext.Provider value={{clearCart, cartList, deleteFav, addToCart, addToFav, favList, deleteItem, totalPrice, cartCounter, isInFav}}>
 
                 {children}
 

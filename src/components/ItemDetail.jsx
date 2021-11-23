@@ -53,7 +53,6 @@ function ItemDetail({ id, img, precio, descripcion, stock, nombre, oferta }) {
                     :
 
                     <span className="product__detail-b2-price">${precio}</span>
-
                 }
 
                 <div className="product__detail-b2-description">

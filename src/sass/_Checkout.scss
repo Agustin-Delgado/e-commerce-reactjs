@@ -37,91 +37,7 @@
             justify-content: center;
             align-content: center;
 
-            &-dni
-            {
-                width: 400px;
-                height: 280px;
-                position: absolute;
-                top: -112px;
-                left: 50%;
-                transform: translateX(-50%);
-
-                label 
-                {
-                    font-size: 10px;
-                    letter-spacing: 1px;
-                    text-shadow: none;
-                    text-transform: uppercase;
-                    font-weight: normal;
-                    opacity: 0.5;
-                    display: block;
-                    margin-bottom: 3px;
-                }
-
-                &-flip 
-                {
-                    transition: 200ms ease-in-out;
-                    transform-style: preserve-3d;
-                    position: relative;        
-                    
-                    &-front
-                    {
-                        width: 400px;
-                        height: 250px;
-                        border-radius: 15px;
-                        backface-visibility: hidden;
-                        background: linear-gradient(45deg,#bed2e0,#e0f2ff 80%,#eef8ff);
-                        position: absolute;
-                        box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
-
-                        &-chip 
-                        {
-                            background-image: url(https://http2.mlstatic.com/resources/frontend/buyingflow-frontend-legacy/dist/images/picture-b47309c45d.svg);
-                            position: relative;
-                            background-repeat: no-repeat;
-                            background-size: 5.76923em;
-                            height: 6.15385em;
-                            top: 80px;
-                            left: 40px;
-                        }
-
-                        &-number 
-                        {
-                            position: absolute;
-                            margin: 0 auto;
-                            top: 103px;
-                            left: 11px;
-                            font-size: 38px;
-                        }
-
-                        &-holder
-                        {
-                            position: absolute;
-                            margin: 0 auto;
-                            top: 76px;
-                            left: 160px;
-                            font-size: 22px;
-                            text-transform: capitalize;
-                        }
-
-                        &-expiration
-                        {
-                            text-align: right;
-                            left: 15px;
-                            position: absolute;
-                            margin: 0 auto;
-                            top: 195px;
-                            font-size: 22px;
-                            text-transform: capitalize;
-
-                            div
-                            {
-                                text-align: center;
-                            }
-                        }
-                    }
-                }
-            }
+            
 
             &-card
             {
@@ -417,7 +333,7 @@
                 margin-top: 60px;
                 flex-direction: row;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: center;
 
                 &-next
                 {
