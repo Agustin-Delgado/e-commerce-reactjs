@@ -1220,88 +1220,6 @@
       align-content: center;
 }
 
-.checkout__contain-content-dni {
-  width: 400px;
-  height: 280px;
-  position: absolute;
-  top: -112px;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-}
-
-.checkout__contain-content-dni label {
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-shadow: none;
-  text-transform: uppercase;
-  font-weight: normal;
-  opacity: 0.5;
-  display: block;
-  margin-bottom: 3px;
-}
-
-.checkout__contain-content-dni-flip {
-  -webkit-transition: 200ms ease-in-out;
-  transition: 200ms ease-in-out;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
-  position: relative;
-}
-
-.checkout__contain-content-dni-flip-front {
-  width: 400px;
-  height: 250px;
-  border-radius: 15px;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  background: linear-gradient(45deg, #bed2e0, #e0f2ff 80%, #eef8ff);
-  position: absolute;
-  -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
-          box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
-}
-
-.checkout__contain-content-dni-flip-front-chip {
-  background-image: url(https://http2.mlstatic.com/resources/frontend/buyingflow-frontend-legacy/dist/images/picture-b47309c45d.svg);
-  position: relative;
-  background-repeat: no-repeat;
-  background-size: 5.76923em;
-  height: 6.15385em;
-  top: 80px;
-  left: 40px;
-}
-
-.checkout__contain-content-dni-flip-front-number {
-  position: absolute;
-  margin: 0 auto;
-  top: 103px;
-  left: 11px;
-  font-size: 38px;
-}
-
-.checkout__contain-content-dni-flip-front-holder {
-  position: absolute;
-  margin: 0 auto;
-  top: 76px;
-  left: 160px;
-  font-size: 22px;
-  text-transform: capitalize;
-}
-
-.checkout__contain-content-dni-flip-front-expiration {
-  text-align: right;
-  left: 15px;
-  position: absolute;
-  margin: 0 auto;
-  top: 195px;
-  font-size: 22px;
-  text-transform: capitalize;
-}
-
-.checkout__contain-content-dni-flip-front-expiration div {
-  text-align: center;
-}
-
 .checkout__contain-content-card {
   width: 400px;
   height: 280px;
@@ -1575,9 +1493,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .checkout__contain-content-button-next {

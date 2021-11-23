@@ -19,7 +19,7 @@ function ItemListContainer() {
                 .then(resp => setItems(resp.docs.map(prod => prod.data())))
                 .finally(() => setLoading(false))
         }
-        else {
+        else{
             const db = getFirestore()
             const dbQuery = db.collection('productos').get()
             dbQuery
@@ -51,7 +51,6 @@ function ItemListContainer() {
             <h2 className="productos-title">Ofertas</h2>
 
                 <div className="productos__row">
-                    
 
                     {
                         <ItemList productos={items.filter(prod => prod.oferta > 0)} />
