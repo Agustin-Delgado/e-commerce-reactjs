@@ -9,6 +9,18 @@ function NavBar() {
     const { favList, deleteFav } = useCartContext()
     const [showCategory, toggleShowCategory] = useState(false)
     const [showFavs, toggleShowFavs] = useState(false)
+    const [searchData, setSearchData] = useState("")
+
+    const handleChange = (e) => {
+
+        setSearchData(e.target.value)
+    }
+
+    const search = (e) => {
+
+        e.preventDefault()
+        
+    }
 
     return (
 
@@ -20,16 +32,17 @@ function NavBar() {
 
             </Link>
 
-            <form className="header__form" action="">
+            <form onSubmit={search} onChange={handleChange} className="header__form" action="">
 
                 <input className="header__form-search" placeholder="Buscar productos, marcas y más..." type="text" />
-                <button className="header__form-submit">
+
+                <Link to={`/${searchData}`} className="header__form-submit">
 
                     <svg pointerEvents="all" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
                     </svg>
 
-                </button>
+                </Link>
 
             </form>
 
@@ -92,7 +105,7 @@ function NavBar() {
                         {
                             showFavs && <div className="header__navbar-list-item-favoritos">
 
-                                {favList == "" ?
+                                {Object.keys(favList).length === 0 ?
 
                                     <div className="header__navbar-list-item-favoritos-empty">
 
@@ -107,7 +120,7 @@ function NavBar() {
 
                                     favList.map(prod =>
 
-                                        <div className="header__navbar-list-item-favoritos-contains">
+                                        <div key={prod.id} className="header__navbar-list-item-favoritos-contains">
 
                                             <Link to={`/detalle/${prod.id}`}>
 
@@ -142,7 +155,7 @@ function NavBar() {
 
                                             <div className="header__navbar-list-item-favoritos-contains-options">
 
-                                                <a onClick={() => deleteFav(prod.id)} className="header__navbar-list-item-favoritos-contains-options-delete">Eliminar</a>
+                                                <button onClick={() => deleteFav(prod.id)} className="header__navbar-list-item-favoritos-contains-options-delete">Eliminar</button>
 
                                             </div>
 

@@ -270,6 +270,7 @@
   cursor: pointer;
   color: #4aabff;
   font-size: 0.8rem;
+  background-color: #fff;
 }
 
 .header__navbar-list-item-favoritos-contains-options-buy {
@@ -958,7 +959,15 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 5px 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  background: linear-gradient(-45deg, #dd33c6, #965ada, #2295befb, #17c4e2);
+  background-size: 450%;
+  -webkit-animation: gradient 5s ease infinite;
+          animation: gradient 5s ease infinite;
+  -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
 }
 
 .product__detail-b2-off div {
@@ -1513,6 +1522,34 @@
   transition: 0.5s ease-in-out;
 }
 
+.checkout__contain-content-button-next-error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-top: 15px;
+}
+
+.checkout__contain-content-button-next-error svg {
+  color: #dc3545;
+}
+
+.checkout__contain-content-button-next-error-text {
+  color: #dc3545;
+  font-size: 0.9rem;
+}
+
 .checkout__contain-content-button-back {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1553,7 +1590,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  max-width: 600px;
+  max-width: 655px;
   -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
           box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
   padding: 6% 2%;
@@ -1584,6 +1621,87 @@
   margin-bottom: 10px;
   border-bottom: 1px solid #ccc;
   padding: 25px 20px;
+}
+
+.checkout__contain-details-content-off {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  width: 100%;
+}
+
+.checkout__contain-details-content-off-title {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  background: linear-gradient(-45deg, #dd33c6, #965ada, #2295befb, #17c4e2);
+  background-size: 450%;
+  -webkit-animation: gradient 5s ease infinite;
+          animation: gradient 5s ease infinite;
+  -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+}
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.checkout__contain-details-content-off div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.checkout__contain-details-content-off-oldprice {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: line-through;
 }
 
 .checkout__contain-details-content-img {
@@ -1701,41 +1819,60 @@
   z-index: 1;
 }
 
-.checkout__contain-details-total #dolarButton .knobs:before {
-  content: 'AR$';
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 20px;
-  height: 10px;
+.purchased {
+  padding: 6% 12%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.purchased-title {
+  font-size: 2.5rem;
+  margin-bottom: 5%;
+}
+
+.purchased__contain {
+  background-color: #fff;
+  padding: 6% 6%;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.purchased__contain-text {
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+.purchased__contain-email {
+  margin-bottom: 30px;
+}
+
+.purchased__contain svg {
   color: #fff;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  padding: 9px 4px;
-  background-color: #4aabff;
-  border-radius: 50%;
-  -webkit-transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-}
-
-.checkout__contain-details-total #dolarButton .checkbox:active + .knobs:before {
-  width: 46px;
-  border-radius: 100px;
-}
-
-.checkout__contain-details-total #dolarButton .checkbox:checked:active + .knobs:before {
-  margin-left: -26px;
-}
-
-.checkout__contain-details-total #dolarButton .checkbox:checked + .knobs:before {
-  content: 'U$D';
-  left: 42px;
-  background-color: #fc42ff;
-}
-
-.checkout__contain-details-total #dolarButton .checkbox:checked ~ .layer {
-  background-color: #fcebeb;
 }
 /*# sourceMappingURL=style.css.map */

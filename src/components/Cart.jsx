@@ -3,10 +3,7 @@ import { Link } from "react-router-dom"
 
 function Cart() {
 
-    const { cartList, deleteItem, totalPrice } = useCartContext()
-
-    console.log(cartList)
-    console.log(cartList == "")
+    const { cartList, deleteItem, totalPriceCart } = useCartContext()
 
     return <>
 
@@ -14,7 +11,7 @@ function Cart() {
 
             <h1 className="carrito-title">Carrito</h1>
 
-            {cartList == "" ?
+            {Object.keys(cartList).length === 0 ?
 
                 <div className="carrito__contain">
 
@@ -33,21 +30,31 @@ function Cart() {
                 <div className="carrito__contain">
 
                     <div className="carrito__contain-buy">
+
                         <Link to="checkout" className="carrito__contain-buy-button">Continuar con la compra</Link>
-                        <h3 id="total" className="carrito__contain-buy-title">Total: ${totalPrice()}</h3>
+                        <h3 className="carrito__contain-buy-title">Total: ${totalPriceCart()}</h3>
+
                     </div>
                     {
                         cartList.map(prod =>
 
-                            <div className="carrito__contain-table">
+                            <div key={prod.id} className="carrito__contain-table">
 
                                 <img className="carrito__contain-table-img" src={prod.img} alt="" />
 
                                 <h2 className="carrito__contain-table-title">{prod.nombre}</h2>
 
+
+
                                 <span className="carrito__contain-table-quantity">{prod.cantidad}</span>
 
-                                <span className="carrito__contain-table-price">${prod.precio * prod.cantidad}</span>
+                                {prod.oferta ?
+
+                                    <span className="carrito__contain-table-price">${prod.precio - ((prod.precio * prod.oferta) / 100)}</span>
+                                    :
+                                    <span className="carrito__contain-table-price">${prod.precio * prod.cantidad}</span>
+
+                                }
 
                                 <svg onClick={() => deleteItem(prod.id)} className="carrito__contain-table-x" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
                                     <path className="carrito__contain-table-x" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
