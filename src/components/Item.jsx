@@ -2,19 +2,17 @@ import { Link } from "react-router-dom";
 import { useCartContext } from "../context/CartContext"
 import { useState } from "react";
 
-function Item({ id, img, nombre, precio, categoria, descripcion, favoritos, stock, cantidad, oferta }) {
-
-    console.log(oferta)
+function Item({ id, img, nombre, precio, descripcion, stock, oferta }) {
 
     const { isInFav, addToFav, favList } = useCartContext()
     const [fillHeart, setFillHeart] = useState(isInFav(id))
 
     const onFav = (state) => {
+        var i = 0
         state ? 
             addToFav({ id, img, precio, descripcion, stock, nombre, oferta }) 
             : 
-            console.log(favList)
-            const i = favList.findIndex(p => p === { id, img, precio, descripcion, stock, nombre, oferta })
+            i = favList.findIndex(p => p.id === id)
             favList.splice(i, 1)
     }
 

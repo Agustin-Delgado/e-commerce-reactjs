@@ -347,6 +347,27 @@
                     text-align: center;
                     cursor: pointer;
                     transition: 0.5s ease-in-out;
+
+                    &-error
+                    {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        align-content: center;
+                        flex-direction: row;
+                        padding-top: 15px;
+        
+                        svg
+                        {
+                            color: $red;
+                        }
+        
+                        &-text
+                        {
+                            color: $red;
+                            font-size: 0.9rem;
+                            }
+                        }
                 }
 
                 &-back
@@ -374,7 +395,7 @@
             align-content: space-between;
             justify-content: center;
             align-items: center;
-            max-width: 600px;
+            max-width: 655px;
             box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
             padding: 6% 2%;
             border-radius: 10px;
@@ -397,6 +418,51 @@
                 margin-bottom: 10px;
                 border-bottom: 1px solid #ccc;
                 padding: 25px 20px;
+
+                &-off{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-start;
+                    align-content: center;
+                    width: 100%;
+
+                    &-title{
+                        height: fit-content;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        margin-left: 10px;
+                        background: linear-gradient(-45deg, #dd33c6, #965ada, #2295befb, #17c4e2);
+                        background-size: 450%;
+                        animation: gradient 5s ease infinite;
+                        box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+                    }
+
+                    @keyframes gradient {
+                        0% {
+                            background-position: 0% 50%;
+                        }
+                        50% {
+                            background-position: 100% 50%;
+                        }
+                        100% {
+                            background-position: 0% 50%;
+                        }
+                    }
+
+                    div{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: row;
+                        align-content: center;
+                    }
+
+                    &-oldprice{
+                        color: rgba(255, 255, 255, 0.55);
+                        text-decoration: line-through;
+                    }
+                }
 
                 &-img
                 {
@@ -504,48 +570,6 @@
                     background-color: #ebf7fc;
                     transition: 0.3s ease all;
                     z-index: 1;
-                }
-
-                #dolarButton .knobs:before
-                {
-                    content: 'AR$';
-                    position: absolute;
-                    top: 4px;
-                    left: 4px;
-                    width: 20px;
-                    height: 10px;
-                    color: $white;
-                    font-size: 10px;
-                    font-weight: bold;
-                    text-align: center;
-                    line-height: 1;
-                    padding: 9px 4px;
-                    background-color: $blue;
-                    border-radius: 50%;
-                    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-                }
-
-                #dolarButton .checkbox:active + .knobs:before
-                {
-                    width: 46px;
-                    border-radius: 100px;
-                }
-
-                #dolarButton .checkbox:checked:active + .knobs:before
-                {
-                    margin-left: -26px;
-                }
-
-                #dolarButton .checkbox:checked + .knobs:before
-                {
-                    content: 'U$D';
-                    left: 42px;
-                    background-color: $pink;
-                }
-
-                #dolarButton .checkbox:checked ~ .layer
-                {
-                    background-color: #fcebeb;
                 }
             }
         }

@@ -25,13 +25,13 @@ function ItemDetailContainer() {
 
             <h1 className="productos-title">Productos</h1>
             <div className="productos__row">
-                
+
                 {
                     loading ? <div className="lds-dual-ring"></div> :
 
                         detail.map(detail =>
 
-                            <ItemDetail id={detail.id} nombre={detail.nombre} img={detail.img} precio={detail.precio} descripcion={detail.descripcion} stock={detail.stock} favoritos={detail.favoritos} oferta={detail.oferta} />
+                            <ItemDetail key={detail.id} id={detail.id} nombre={detail.nombre} img={detail.img} precio={detail.precio} descripcion={detail.descripcion} stock={detail.stock} favoritos={detail.favoritos} oferta={detail.oferta} />
 
                         )
                 }

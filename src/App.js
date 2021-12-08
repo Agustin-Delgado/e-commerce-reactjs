@@ -26,6 +26,7 @@ function App() {
             <Route exact path="/checkout" component={Checkout}/>
             <Route exact path="/checkout/:checkoutId" component={Checkout}/>
             <Route exact path="/checkout/purchased/:order" component={Purchased}/>
+            <Route exact path="/:search" component={ItemListContainer}/>
           </Switch>
         </BrowserRouter>
       </CartContextProvider>

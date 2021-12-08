@@ -9,7 +9,7 @@ function Checkout() {
 
     const history = useHistory()
     const [order, setOrder] = useState('')
-    const { cartList, totalPrice, clearCart } = useCartContext()
+    const { cartList, totalPriceCart, clearCart } = useCartContext()
     const { checkoutId } = useParams()
     const [checkout, setCheckout] = useState([])
     const [formData, setFormData] = useState({ name: "", phone: "", email: "", doc: "" })
@@ -29,8 +29,7 @@ function Checkout() {
             setCheckout(cartList)
         }
 
-    }, [checkoutId])
-
+    }, [checkoutId, cartList])
 
     const generarOrden = (e) => {
 
@@ -39,20 +38,21 @@ function Checkout() {
         let orden = {}
         orden.date = firebase.firestore.Timestamp.fromDate(new Date())
         orden.buyer = formData
-        orden.total = totalPrice()
+        orden.total = totalPriceCart()
         orden.items = checkout.map(prod => {
             const id = prod.id
             const nombre = prod.nombre
             const precio = prod.precio
             const cantidad = prod.cantidad
+            const img = prod.img
+            const oferta = prod.oferta
 
-            return { id, nombre, precio, cantidad }
+            return { id, nombre, precio, cantidad, img, oferta }
         })
 
         const dbQuery = getFirestore()
         dbQuery.collection('orders').add(orden)
             .then(resp => setOrder(resp.id))
-            /*             .finally(() => history.push(`/checkout/${idOrder}`)) */
             .finally(clearCart())
 
 
@@ -71,7 +71,6 @@ function Checkout() {
                 })
 
                 batch.commit()
-
             })
     }
 
@@ -87,22 +86,20 @@ function Checkout() {
         if (order) {
 
             return history.push(`/checkout/purchased/${order}`)
-
         }
 
-    }, [order])
-
+    }, [order, history])
 
     return <>
 
-        <h1 class="checkout-title">Checkout</h1>
-        <div class="checkout__contain">
-            <div class="checkout__contain-content">
-                <div class="checkout__contain-content-card">
-                    <div class="checkout__contain-content-card-flip">
-                        <div class="checkout__contain-content-card-flip-front">
-                            <div class="checkout__contain-content-card-flip-front-chip"></div>
-                            <div class="checkout__contain-content-card-flip-front-logo">
+        <h1 className="checkout-title">Checkout</h1>
+        <div className="checkout__contain">
+            <div className="checkout__contain-content">
+                <div className="checkout__contain-content-card">
+                    <div className="checkout__contain-content-card-flip">
+                        <div className="checkout__contain-content-card-flip-front">
+                            <div className="checkout__contain-content-card-flip-front-chip"></div>
+                            <div className="checkout__contain-content-card-flip-front-logo">
                                 <svg version="1.1" id="visa" xmlns="http://www.w3.org/2000/svg"
                                     x="0px" y="0px" width="47.834px"
                                     height="47.834px" viewBox="0 0 47.834 47.834">
@@ -123,19 +120,17 @@ function Checkout() {
                                     </g>
                                 </svg>
                             </div>
-                            <div class="checkout__contain-content-card-flip-front-number"></div>
-                            <div class="checkout__contain-content-card-flip-front-holder">
+                            <div className="checkout__contain-content-card-flip-front-number"></div>
+                            <div className="checkout__contain-content-card-flip-front-holder">
                                 <label>Nombre y apellido</label>
-                                <div></div>
                             </div>
-                            <div class="checkout__contain-content-card-flip-front-expiration">
+                            <div className="checkout__contain-content-card-flip-front-expiration">
                                 <label>Fecha de expiración</label>
-                                <div></div>
                             </div>
                         </div>
-                        <div class="checkout__contain-content-card-flip-back">
-                            <div class="checkout__contain-content-card-flip-back-strip"></div>
-                            <div class="checkout__contain-content-card-flip-back-logo">
+                        <div className="checkout__contain-content-card-flip-back">
+                            <div className="checkout__contain-content-card-flip-back-strip"></div>
+                            <div className="checkout__contain-content-card-flip-back-logo">
                                 <svg version="1.1" id="visa" xmlns="http://www.w3.org/2000/svg"
                                     x="0px" y="0px" width="47.834px"
                                     height="47.834px" viewBox="0 0 47.834 47.834">
@@ -156,31 +151,30 @@ function Checkout() {
                                     </g>
                                 </svg>
                             </div>
-                            <div class="checkout__contain-content-card-flip-back-ccv">
+                            <div className="checkout__contain-content-card-flip-back-ccv">
                                 <label>Código de seguridad</label>
-                                <div></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <form onSubmit={generarOrden} onChange={handleChange} class="checkout__contain-content-form">
+                <form onSubmit={generarOrden} onChange={handleChange} className="checkout__contain-content-form">
 
                     <fieldset>
-                        <label for="card-number">Número de tarjeta</label>
-                        <input type="num" id="card-number" class="input-cart-number" maxlength="4" />
-                        <input type="num" id="card-number-1" class="input-cart-number" maxlength="4" />
-                        <input type="num" id="card-number-2" class="input-cart-number" maxlength="4" />
-                        <input type="num" id="card-number-3" class="input-cart-number" maxlength="4" />
+                        <label htmlFor="card-number">Número de tarjeta</label>
+                        <input name="card-a" type="num" id="card-number" className="input-cart-number" maxLength="4" required />
+                        <input name="card-b" type="num" id="card-number-1" className="input-cart-number" maxLength="4" required />
+                        <input name="card-c" type="num" id="card-number-2" className="input-cart-number" maxLength="4" required />
+                        <input name="card-d" type="num" id="card-number-3" className="input-cart-number" maxLength="4" required />
                     </fieldset>
                     <fieldset>
-                        <label for="card-holder">Nombre y apellido del titular</label>
-                        <input defaultValue={formData.name} name='name' type="text" id="card-holder" />
+                        <label htmlFor="card-holder">Nombre y apellido del titular</label>
+                        <input defaultValue={formData.name} name='name' type="text" id="card-holder" required />
                     </fieldset>
-                    <fieldset class="fieldset-expiration">
-                        <label for="card-expiration-month">Fecha de expiración</label>
-                        <div class="select">
-                            <select id="card-expiration-month">
+                    <fieldset className="fieldset-expiration">
+                        <label htmlFor="card-expiration-month">Fecha de expiración</label>
+                        <div className="select">
+                            <select name="exp-day" id="card-expiration-month" required>
                                 <option></option>
                                 <option>01</option>
                                 <option>02</option>
@@ -196,8 +190,8 @@ function Checkout() {
                                 <option>12</option>
                             </select>
                         </div>
-                        <div class="select">
-                            <select id="card-expiration-year">
+                        <div className="select">
+                            <select name="exp-year" id="card-expiration-year" required>
                                 <option></option>
                                 <option>2021</option>
                                 <option>2022</option>
@@ -212,28 +206,28 @@ function Checkout() {
                             </select>
                         </div>
                     </fieldset>
-                    <fieldset class="fieldset-ccv">
-                        <label for="card-ccv">CVV</label>
-                        <input type="text" id="card-ccv" maxlength="3" />
+                    <fieldset className="fieldset-ccv">
+                        <label htmlFor="">CVV</label>
+                        <input name="cvv" type="num" id="card-ccv" maxLength="3" required />
                     </fieldset>
-                    <div class="double-fieldset">
+                    <div className="double-fieldset">
                         <fieldset>
                             <label>Número de documento</label>
-                            <input defaultValue={formData.doc} name="doc" id="dni-number" type="num" class="input-dni-number" maxlength="10" />
+                            <input defaultValue={formData.doc} name="doc" id="dni-number" type="num" className="input-dni-number" maxLength="10" required />
                         </fieldset>
                         <fieldset>
-                            <label for="">Numero de telefono</label>
-                            <input defaultValue={formData.phone} name='phone' id="tel-number" type="text" />
+                            <label htmlFor="">Numero de telefono</label>
+                            <input defaultValue={formData.phone} name='phone' id="tel-number" type="text" required />
                         </fieldset>
                     </div>
                     <fieldset>
-                        <label for="">Correo electronico</label>
-                        <input defaultValue={formData.email} name='email' id="email-text" type="text" />
+                        <label htmlFor="">Correo electronico</label>
+                        <input defaultValue={formData.email} name='email' id="email-text" type="text" required />
                     </fieldset>
 
-                    <div class="checkout__contain-content-button">
+                    <div className="checkout__contain-content-button">
 
-                        <button class="checkout__contain-content-button-next">Finalizar compra</button>
+                        <button className="checkout__contain-content-button-next">Finalizar compra</button>
 
                     </div>
 
@@ -241,27 +235,50 @@ function Checkout() {
 
             </div>
 
-            <div class="checkout__contain-details">
-                <h2 class="checkout__contain-details-title">Detalle de la compra</h2>
+
+            <div className="checkout__contain-details">
+                <h2 className="checkout__contain-details-title">Detalle de la compra</h2>
 
                 {
                     checkout.map(prod =>
 
-                        <div class="checkout__contain-details-content">
-                            <img class="checkout__contain-details-content-img" src={prod.img}
+                        <div key={prod.id} className="checkout__contain-details-content">
+                            <img className="checkout__contain-details-content-img" src={prod.img}
                                 alt="" />
-                            <h3 class="checkout__contain-details-content-title">{prod.nombre}</h3>
-                            <span class="checkout__contain-details-content-quantity">Cantidad: {prod.cantidad}</span>
-                            <span class="checkout__contain-details-content-subtotal">Subtotal: ${prod.precio * prod.cantidad}</span>
+                            <h3 className="checkout__contain-details-content-title">{prod.nombre}</h3>
+                            <span className="checkout__contain-details-content-quantity">Cantidad: {prod.cantidad}</span>
+
+                            {
+                                prod.oferta ?
+
+                                    <div className="checkout__contain-details-content-off">
+
+                                        <span className="checkout__contain-details-content-off-oldprice">${prod.precio}</span>
+
+                                        <div>
+
+                                            <span className="checkout__contain-details-content-price">${prod.precio - ((prod.precio * prod.oferta) / 100)}</span>
+                                            <span className="checkout__contain-details-content-off-title">{prod.oferta}% OFF</span>
+
+                                        </div>
+
+                                    </div>
+
+                                    :
+
+                                    <span className="checkout__contain-details-content-subtotal">Subtotal: ${prod.precio * prod.cantidad}</span>
+                            }
 
                         </div >
                     )
                 }
 
-                <h3 class="checkout__contain-details-total-title">Total: ${totalPrice()}</h3>
+                <h3 className="checkout__contain-details-total-title">Total: ${checkout.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100))), 0)}</h3>
 
             </div>
+
         </div>
+
 
     </>
 }
