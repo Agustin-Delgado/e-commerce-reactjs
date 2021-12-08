@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../context/CartContext"
 
-function ItemCount({ initial, stock, onAdd, onFav, id}) {
+function ItemCount({ initial, stock, onAdd, onFav, id }) {
 
     const { isInFav } = useCartContext()
 

@@ -8,6 +8,7 @@ function ItemListContainer() {
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
     const { categoriaId } = useParams()
+    const { search } = useParams()
 
     useEffect(() => {
 
@@ -18,8 +19,15 @@ function ItemListContainer() {
             dbQuery.get()
                 .then(resp => setItems(resp.docs.map(prod => prod.data())))
                 .finally(() => setLoading(false))
+
+        } else if (search) {
+            const db = getFirestore()
+            const dbQuery = db.collection('productos').get()
+            dbQuery
+                .then(resp => setItems(resp.docs.map(prod => prod.data()).filter(prod => prod.nombre.toUpperCase().indexOf(search.toUpperCase()) > -1)))
+                .finally(() => setLoading(false))
         }
-        else{
+        else {
             const db = getFirestore()
             const dbQuery = db.collection('productos').get()
             dbQuery
@@ -27,7 +35,7 @@ function ItemListContainer() {
                 .finally(() => setLoading(false))
         }
 
-    }, [categoriaId])
+    }, [categoriaId, search])
 
 
     return (
@@ -43,12 +51,8 @@ function ItemListContainer() {
                     }
 
                 </div>
-            
-            </section>
 
-            <section className="productos">
-
-            <h2 className="productos-title">Ofertas</h2>
+                <h2 className="productos-title">Ofertas</h2>
 
                 <div className="productos__row">
 

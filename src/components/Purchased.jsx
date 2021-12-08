@@ -1,32 +1,89 @@
+import { useState, useEffect } from "react"
+import { getFirestore } from "../services/getFirestore";
 
+function Purchased({ match }) {
 
-function Purchased() {
+    const [itemOrders, setItemOrders] = useState([])
+    const [buyerOrders, setBuyerOrders] = useState([])
+    const { params: { order } } = match
+
+    useEffect(() => {
+        const db = getFirestore()
+        const dbQuery = db.collection('orders').doc(order)
+        dbQuery.get()
+            .then(resp => setItemOrders(resp.data().items), 
+            resp => setBuyerOrders(resp.data().buyer))
+    }, [order])
+
 
     return <>
-        <div class="purchased__contain">
-            
-            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
-            </svg>
-            <h2 class="purchased__contain-text">¡Gracias 432432432 por elegirnos!</h2>
-    
-            <span class="purchased__contain-email">Corroborá las instrucciones de retiro en tu correo: 432432432432</span>
-    
-            <div class="checkout__contain-details">
-    
-                <h2 class="checkout__contain-details-title">Detalle de la compra</h2><div class="checkout__contain-details-content">
-                  <img class="checkout__contain-details-content-img" src="./resources/images/productos/p4.webp" alt=""/>
-                  <h3 class="checkout__contain-details-content-title">Silla Sillón Gamer</h3>
-                  <span class="checkout__contain-details-content-quantity">Cantidad: 1</span>
-                  <span class="checkout__contain-details-content-subtotal">Subtotal: $29999</span>
-              </div>
 
-                <div class="checkout__contain-details-total">
-                    
-                    <h3 class="checkout__contain-details-total-title">Total: $29999</h3>
+        <div className="purchased__contain">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="currentColor" className="bi bi-suit-heart-fill" viewBox="0 0 16 16">
+                <defs>
+                    <linearGradient id="myGradient" gradientTransform="rotate(45)">
+                        <stop offset="0%" stopColor="#dd33c6">
+                            <animate attributeName="stop-color" attributeType="CSS" values="#dd33c6;#2295befb;#965ada;#dd33c6;" dur="5s" repeatCount="indefinite"></animate>
+                        </stop>
+                        <stop offset="100%" stopColor="#17c4e2">
+                            <animate attributeName="stop-color" attributeType="CSS" values="#17c4e2;#965ada;#2295befb;#17c4e2;" dur="5s" repeatCount="indefinite"></animate>
+                        </stop>
+                    </linearGradient>
+                </defs>
+
+                <path fill="url('#myGradient')" d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
+            </svg>
+
+            <h2 className="purchased__contain-text">¡Gracias {buyerOrders.name} por elegirnos!</h2>
+
+            <span className="purchased__contain-email">Corroborá las instrucciones de retiro en tu correo: {buyerOrders.email}</span>
+
+            <div className="checkout__contain-details">
+
+                <h2 className="checkout__contain-details-title">Detalle de la compra</h2>
+                {
+                    itemOrders.map(detail =>
+                        <div key={detail.id} className="checkout__contain-details-content">
+                            <img className="checkout__contain-details-content-img" src={detail.img} alt="" />
+                            <h3 className="checkout__contain-details-content-title">{detail.nombre}</h3>
+                            <span className="checkout__contain-details-content-quantity">Cantidad: {detail.cantidad}</span>
+
+                            {
+                                detail.oferta ?
+
+                                    <div className="checkout__contain-details-content-off">
+
+                                        <span className="checkout__contain-details-content-off-oldprice">${detail.precio}</span>
+
+                                        <div>
+
+                                            <span className="checkout__contain-details-content-price">${detail.precio - ((detail.precio * detail.oferta) / 100)}</span>
+                                            <span className="checkout__contain-details-content-off-title">{detail.oferta}% OFF</span>
+
+                                        </div>
+
+                                    </div>
+
+                                    :
+
+                                    <span className="checkout__contain-details-content-subtotal">Subtotal: ${detail.precio * detail.cantidad}</span>
+                            }
+
+                        </div>
+                    )
+                }
+
+                <div className="checkout__contain-details-total">
+
+                    <h3 className="checkout__contain-details-total-title">Total: {itemOrders.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100))), 0)}</h3>
+
                 </div>
 
-            </div></div>
+            </div>
+
+        </div>
+
     </>
 }
 
