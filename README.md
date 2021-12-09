@@ -1,6 +1,5 @@
 ![E-Commerce con react](https://raw.githack.com/Agustin-Delgado/r-commerce/master/src/img/logoWhite.png)
 
-# Company Name
 ## E-Commerce usando ReactJS 
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
