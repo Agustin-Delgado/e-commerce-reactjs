@@ -31,7 +31,8 @@ function Cart() {
 
                     <div className="carrito__contain-buy">
 
-                        <Link to="checkout" className="carrito__contain-buy-button">Continuar con la compra</Link>
+                        <Link to='/checkout' className="carrito__contain-buy-button">Continuar con la compra</Link>
+
                         <h3 className="carrito__contain-buy-title">Total: ${totalPriceCart()}</h3>
 
                     </div>
@@ -44,16 +45,20 @@ function Cart() {
 
                                 <h2 className="carrito__contain-table-title">{prod.nombre}</h2>
 
-
-
                                 <span className="carrito__contain-table-quantity">{prod.cantidad}</span>
+
+                                {prod.cantidad > prod.stock ?
+
+                                    <h1>error</h1>
+                                    :
+                                    <h1>flama</h1>
+                                }
 
                                 {prod.oferta ?
 
                                     <span className="carrito__contain-table-price">${prod.precio - ((prod.precio * prod.oferta) / 100)}</span>
                                     :
                                     <span className="carrito__contain-table-price">${prod.precio * prod.cantidad}</span>
-
                                 }
 
                                 <svg onClick={() => deleteItem(prod.id)} className="carrito__contain-table-x" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">

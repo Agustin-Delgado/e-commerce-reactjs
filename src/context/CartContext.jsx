@@ -15,12 +15,18 @@ const CartContextProvider = ({ children }) => {
             cartList[i].cantidad = cartList[i].cantidad + items.cantidad
             setCartList([...cartList])
 
+            if (cartList[i].cantidad > cartList[i].stock) {
+                cartList[i].cantidad = cartList[i].cantidad - items.cantidad
+                setCartList([...cartList])
+            }
+
         } else {
             setCartList([
                 ...cartList,
                 items
             ])
         }
+
     }
 
     function addToFav(items) {
