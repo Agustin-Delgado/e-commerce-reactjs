@@ -161,65 +161,19 @@ function Checkout() {
                 <form onSubmit={generarOrden} onChange={handleChange} className="checkout__contain-content-form">
 
                     <fieldset>
-                        <label htmlFor="card-number">Número de tarjeta</label>
-                        <input name="card-a" type="num" id="card-number" className="input-cart-number" maxLength="4" required />
-                        <input name="card-b" type="num" id="card-number-1" className="input-cart-number" maxLength="4" required />
-                        <input name="card-c" type="num" id="card-number-2" className="input-cart-number" maxLength="4" required />
-                        <input name="card-d" type="num" id="card-number-3" className="input-cart-number" maxLength="4" required />
-                    </fieldset>
-                    <fieldset>
                         <label htmlFor="card-holder">Nombre y apellido del titular</label>
                         <input defaultValue={formData.name} name='name' type="text" id="card-holder" required />
                     </fieldset>
                     <fieldset className="fieldset-expiration">
-                        <label htmlFor="card-expiration-month">Fecha de expiración</label>
-                        <div className="select">
-                            <select name="exp-day" id="card-expiration-month" required>
-                                <option></option>
-                                <option>01</option>
-                                <option>02</option>
-                                <option>03</option>
-                                <option>04</option>
-                                <option>05</option>
-                                <option>06</option>
-                                <option>07</option>
-                                <option>08</option>
-                                <option>09</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                            </select>
-                        </div>
-                        <div className="select">
-                            <select name="exp-year" id="card-expiration-year" required>
-                                <option></option>
-                                <option>2021</option>
-                                <option>2022</option>
-                                <option>2023</option>
-                                <option>2024</option>
-                                <option>2026</option>
-                                <option>2027</option>
-                                <option>2028</option>
-                                <option>2029</option>
-                                <option>2030</option>
-                                <option>2031</option>
-                            </select>
-                        </div>
+                    <label htmlFor="">Numero de telefono</label>
+                            <input defaultValue={formData.phone} name='phone' id="tel-number" type="text" required />
                     </fieldset>
                     <fieldset className="fieldset-ccv">
-                        <label htmlFor="">CVV</label>
-                        <input name="cvv" type="num" id="card-ccv" maxLength="3" required />
-                    </fieldset>
-                    <div className="double-fieldset">
-                        <fieldset>
                             <label>Número de documento</label>
                             <input defaultValue={formData.doc} name="doc" id="dni-number" type="num" className="input-dni-number" maxLength="10" required />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="">Numero de telefono</label>
-                            <input defaultValue={formData.phone} name='phone' id="tel-number" type="text" required />
-                        </fieldset>
-                    </div>
+ 
+                    </fieldset>
+
                     <fieldset>
                         <label htmlFor="">Correo electronico</label>
                         <input defaultValue={formData.email} name='email' id="email-text" type="text" required />

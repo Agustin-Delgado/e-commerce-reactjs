@@ -55,7 +55,9 @@ function Item({ id, img, nombre, precio, descripcion, stock, oferta }) {
 
                 </Link>
 
-                {
+                {stock === 0 ?
+                <span className="productos__row-card-price">Sin stock</span>
+                :
                     oferta ?
 
                     <div className="productos__row-card-off">
