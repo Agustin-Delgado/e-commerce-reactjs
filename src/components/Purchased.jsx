@@ -14,7 +14,7 @@ function Purchased({ match }) {
             .then(resp => setItemOrders(resp.data().items), 
             resp => setBuyerOrders(resp.data().buyer))
     }, [order])
-
+console.log(itemOrders)
 
     return <>
 

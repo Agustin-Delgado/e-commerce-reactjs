@@ -1393,7 +1393,7 @@
 
 .checkout__contain-content-form fieldset.fieldset-expiration {
   float: left;
-  width: 60%;
+  width: 45%;
 }
 
 .checkout__contain-content-form fieldset.fieldset-expiration .select {
@@ -1405,7 +1405,7 @@
 .checkout__contain-content-form fieldset.fieldset-ccv {
   clear: none;
   float: right;
-  width: 86px;
+  width: 45%;
 }
 
 .checkout__contain-content-form fieldset label {
