@@ -31,6 +31,8 @@ function Checkout() {
 
     }, [checkoutId, cartList])
 
+
+
     const generarOrden = (e) => {
 
         e.preventDefault()
@@ -89,6 +91,8 @@ function Checkout() {
         }
 
     }, [order, history])
+
+    console.log(formData)
 
     return <>
 
@@ -165,13 +169,13 @@ function Checkout() {
                         <input defaultValue={formData.name} name='name' type="text" id="card-holder" required />
                     </fieldset>
                     <fieldset className="fieldset-expiration">
-                    <label htmlFor="">Numero de telefono</label>
-                            <input defaultValue={formData.phone} name='phone' id="tel-number" type="text" required />
+                        <label htmlFor="">Numero de telefono</label>
+                        <input defaultValue={formData.phone} name='phone' id="tel-number" type="text" required />
                     </fieldset>
                     <fieldset className="fieldset-ccv">
-                            <label>Número de documento</label>
-                            <input defaultValue={formData.doc} name="doc" id="dni-number" type="num" className="input-dni-number" maxLength="10" required />
- 
+                        <label>Número de documento</label>
+                        <input defaultValue={formData.doc} name="doc" id="dni-number" type="num" className="input-dni-number" maxLength="10" required />
+
                     </fieldset>
 
                     <fieldset>
@@ -207,11 +211,11 @@ function Checkout() {
 
                                     <div className="checkout__contain-details-content-off">
 
-                                        <span className="checkout__contain-details-content-off-oldprice">${prod.precio}</span>
+                                        <span className="checkout__contain-details-content-off-oldprice">${prod.precio * prod.cantidad}</span>
 
                                         <div>
 
-                                            <span className="checkout__contain-details-content-price">${prod.precio - ((prod.precio * prod.oferta) / 100)}</span>
+                                            <span className="checkout__contain-details-content-price">${(prod.precio - ((prod.precio * prod.oferta) / 100)) * prod.cantidad}</span>
                                             <span className="checkout__contain-details-content-off-title">{prod.oferta}% OFF</span>
 
                                         </div>
@@ -227,7 +231,7 @@ function Checkout() {
                     )
                 }
 
-                <h3 className="checkout__contain-details-total-title">Total: ${checkout.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100))), 0)}</h3>
+                <h3 className="checkout__contain-details-total-title">Total: ${checkout.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100)) * value.cantidad), 0)}</h3>
 
             </div>
 
