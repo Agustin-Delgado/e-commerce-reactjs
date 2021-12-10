@@ -4,7 +4,7 @@ import { useCartContext } from "../context/CartContext"
 
 function ItemCount({ initial, stock, onAdd, onFav, id }) {
 
-    const { isInFav } = useCartContext()
+    const { isInFav} = useCartContext()
 
     const [quantity, setQuantity] = useState(initial)
 
@@ -35,6 +35,8 @@ function ItemCount({ initial, stock, onAdd, onFav, id }) {
 
     return (
         <>
+            
+
             {stock === 0 ?
 
                 <div className="productos__row-card-buy-quantity-container">

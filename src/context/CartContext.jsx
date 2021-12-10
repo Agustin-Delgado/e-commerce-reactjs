@@ -7,6 +7,7 @@ const CartContextProvider = ({ children }) => {
 
     const [cartList, setCartList] = useState([])
     const [favList, setFavList] = useState([])
+    const [noStockAvaible, setNoStockAvible] = useState(false)
 
     function addToCart(items) {
 
@@ -14,10 +15,12 @@ const CartContextProvider = ({ children }) => {
             const i = cartList.findIndex(p => p.id === items.id)
             cartList[i].cantidad = cartList[i].cantidad + items.cantidad
             setCartList([...cartList])
-
+            setNoStockAvible(false)
+            
             if (cartList[i].cantidad > cartList[i].stock) {
                 cartList[i].cantidad = cartList[i].cantidad - items.cantidad
                 setCartList([...cartList])
+                setNoStockAvible(true)
             }
 
         } else {
@@ -25,6 +28,7 @@ const CartContextProvider = ({ children }) => {
                 ...cartList,
                 items
             ])
+            setNoStockAvible(false)
         }
 
     }
@@ -68,7 +72,7 @@ const CartContextProvider = ({ children }) => {
 
     return (
         <>
-            <CartContext.Provider value={{ clearCart, cartList, deleteFav, addToCart, addToFav, favList, deleteItem, totalPriceCart, cartCounter, isInFav }}>
+            <CartContext.Provider value={{ noStockAvaible, setNoStockAvible, clearCart, cartList, deleteFav, addToCart, addToFav, favList, deleteItem, totalPriceCart, cartCounter, isInFav }}>
 
                 {children}
 

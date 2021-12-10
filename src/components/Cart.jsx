@@ -47,16 +47,9 @@ function Cart() {
 
                                 <span className="carrito__contain-table-quantity">{prod.cantidad}</span>
 
-                                {prod.cantidad > prod.stock ?
-
-                                    <h1>error</h1>
-                                    :
-                                    <h1>flama</h1>
-                                }
-
                                 {prod.oferta ?
 
-                                    <span className="carrito__contain-table-price">${prod.precio - ((prod.precio * prod.oferta) / 100)}</span>
+                                    <span className="carrito__contain-table-price">${(prod.precio - ((prod.precio * prod.oferta) / 100)) * prod.cantidad}</span>
                                     :
                                     <span className="carrito__contain-table-price">${prod.precio * prod.cantidad}</span>
                                 }
