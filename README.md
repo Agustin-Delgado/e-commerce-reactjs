@@ -2,8 +2,6 @@
 
 ## E-Commerce usando ReactJS 
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 ## Objetivo
 >El objetivo de este proyecto es crear una tienda electrónica siguiendo los paramentros establecidos por Coderhouse, el mismo utiliza React como base y se podra simular la compra de productos, asi como tambien agregar a favoritos, tener control de las compras realizadas, buscador de productos, carrito, categorias y demás funciones básicas de una tienda electrónica.
 
