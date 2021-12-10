@@ -793,6 +793,64 @@
           align-items: flex-start;
 }
 
+.product__detail-error {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  background-color: #fff;
+  height: 130px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  top: 73%;
+  right: 468px;
+}
+
+.product__detail-error-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fc42ff;
+  cursor: pointer;
+}
+
+.product__detail-error-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px 10px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.product__detail-error-text svg {
+  margin-right: 10px;
+  color: #fc42ff;
+}
+
 .product__detail-b1 {
   background-color: #fff;
   padding: 6% 3%;
@@ -1598,6 +1656,10 @@
   background-image: linear-gradient(45deg, rgba(21, 162, 203, 0.8) 15%, rgba(224, 42, 255, 0.8) 100%);
   color: #fff;
   z-index: 0;
+}
+
+.checkout__contain-details-id {
+  margin-top: 30px;
 }
 
 .checkout__contain-details-title {

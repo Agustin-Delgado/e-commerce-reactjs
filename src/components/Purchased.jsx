@@ -11,10 +11,8 @@ function Purchased({ match }) {
         const db = getFirestore()
         const dbQuery = db.collection('orders').doc(order)
         dbQuery.get()
-            .then(resp => setItemOrders(resp.data().items), 
-            resp => setBuyerOrders(resp.data().buyer))
+            .then(resp => (setItemOrders(resp.data().items), setBuyerOrders(resp.data().buyer)))
     }, [order])
-console.log(itemOrders)
 
     return <>
 
@@ -37,7 +35,7 @@ console.log(itemOrders)
 
             <h2 className="purchased__contain-text">¡Gracias {buyerOrders.name} por elegirnos!</h2>
 
-            <span className="purchased__contain-email">Corroborá las instrucciones de retiro en tu correo: {buyerOrders.email}</span>
+            <span className="purchased__contain-email">Corroborá las instrucciones de retiro en tu correo: {buyerOrders.email} para continuar con la compra</span>
 
             <div className="checkout__contain-details">
 
@@ -54,11 +52,11 @@ console.log(itemOrders)
 
                                     <div className="checkout__contain-details-content-off">
 
-                                        <span className="checkout__contain-details-content-off-oldprice">${detail.precio}</span>
+                                        <span className="checkout__contain-details-content-off-oldprice">${detail.precio * detail.cantidad}</span>
 
                                         <div>
 
-                                            <span className="checkout__contain-details-content-price">${detail.precio - ((detail.precio * detail.oferta) / 100)}</span>
+                                            <span className="checkout__contain-details-content-price">${(detail.precio - ((detail.precio * detail.oferta) / 100)) * detail.cantidad}</span>
                                             <span className="checkout__contain-details-content-off-title">{detail.oferta}% OFF</span>
 
                                         </div>
@@ -76,9 +74,12 @@ console.log(itemOrders)
 
                 <div className="checkout__contain-details-total">
 
-                    <h3 className="checkout__contain-details-total-title">Total: {itemOrders.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100))), 0)}</h3>
+                    <h3 className="checkout__contain-details-total-title">Total: {itemOrders.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100)) * value.cantidad), 0)}</h3>
+                    
 
                 </div>
+
+                <span className="checkout__contain-details-id">ID de la compra: {order}</span>
 
             </div>
 
