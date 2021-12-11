@@ -9,7 +9,7 @@ function Checkout() {
 
     const history = useHistory()
     const [order, setOrder] = useState('')
-    const { cartList, totalPriceCart, clearCart } = useCartContext()
+    const { cartList, totalPriceCart, clearCart, checkoutList } = useCartContext()
     const { checkoutId } = useParams()
     const [checkout, setCheckout] = useState([])
     const [formData, setFormData] = useState({ name: "", phone: "", email: "", doc: "" })
@@ -19,10 +19,7 @@ function Checkout() {
 
         if (checkoutId) {
 
-            const db = getFirestore()
-            const dbQuery = db.collection('productos').where('id', '==', checkoutId)
-            dbQuery.get()
-                .then(resp => setCheckout(resp.docs.map(prod => prod.data())))
+            setCheckout(checkoutList)
         }
         else {
 
@@ -30,8 +27,6 @@ function Checkout() {
         }
 
     }, [checkoutId, cartList])
-
-
 
     const generarOrden = (e) => {
 
@@ -91,8 +86,6 @@ function Checkout() {
         }
 
     }, [order, history])
-
-    console.log(formData)
 
     return <>
 
@@ -215,7 +208,7 @@ function Checkout() {
 
                                         <div>
 
-                                            <span className="checkout__contain-details-content-price">${(prod.precio - ((prod.precio * prod.oferta) / 100)) * prod.cantidad}</span>
+                                            <span className="checkout__contain-details-content-price">${Number((prod.precio - ((prod.precio * prod.oferta) / 100)) * prod.cantidad).toFixed(1)}</span>
                                             <span className="checkout__contain-details-content-off-title">{prod.oferta}% OFF</span>
 
                                         </div>
@@ -231,7 +224,7 @@ function Checkout() {
                     )
                 }
 
-                <h3 className="checkout__contain-details-total-title">Total: ${checkout.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100)) * value.cantidad), 0)}</h3>
+                <h3 className="checkout__contain-details-total-title">Total: ${Number(checkout.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100)) * value.cantidad), 0).toFixed(1))}</h3>
 
             </div>
 

@@ -49,7 +49,7 @@ function Cart() {
 
                                 {prod.oferta ?
 
-                                    <span className="carrito__contain-table-price">${(prod.precio - ((prod.precio * prod.oferta) / 100)) * prod.cantidad}</span>
+                                    <span className="carrito__contain-table-price">${Number((prod.precio - ((prod.precio * prod.oferta) / 100)) * prod.cantidad).toFixed(1)}</span>
                                     :
                                     <span className="carrito__contain-table-price">${prod.precio * prod.cantidad}</span>
                                 }

@@ -1,11 +1,9 @@
 import { useCartContext } from "../context/CartContext"
-import { useState } from "react"
 import ItemCount from "./ItemCount"
 
 function ItemDetail({ id, img, precio, descripcion, stock, nombre, oferta }) {
 
-    const { addToCart, addToFav, favList, noStockAvaible, setNoStockAvible } = useCartContext()
-    const [showError, toggleShowError] = useState(false)
+    const { addToCart, addToFav, favList, noStockAvaible, setNoStockAvible, addToCheckout } = useCartContext()
 
     const onAdd = (cantidad) => {
         addToCart({ id, img, precio, descripcion, stock, nombre, cantidad, oferta })
@@ -20,7 +18,9 @@ function ItemDetail({ id, img, precio, descripcion, stock, nombre, oferta }) {
         favList.splice(i, 1)
     }
 
-    console.log(noStockAvaible)
+    const onBuy = (cantidad) => {
+        addToCheckout({ id, img, precio, descripcion, stock, nombre, cantidad, oferta })
+    }
 
     return <>
 
@@ -63,7 +63,7 @@ function ItemDetail({ id, img, precio, descripcion, stock, nombre, oferta }) {
                     <p className="product__detail-b2-description-text">{descripcion}</p>
                 </div>
 
-                <ItemCount id={id} onFav={onFav} initial={1} stock={stock} onAdd={onAdd} />
+                <ItemCount id={id} onBuy={onBuy} onFav={onFav} initial={1} stock={stock} onAdd={onAdd} />
 
             </div>
 
