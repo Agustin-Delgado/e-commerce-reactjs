@@ -56,7 +56,7 @@ function Purchased({ match }) {
 
                                         <div>
 
-                                            <span className="checkout__contain-details-content-price">${(detail.precio - ((detail.precio * detail.oferta) / 100)) * detail.cantidad}</span>
+                                            <span className="checkout__contain-details-content-price">${Number((detail.precio - ((detail.precio * detail.oferta) / 100)) * detail.cantidad).toFixed(1)}</span>
                                             <span className="checkout__contain-details-content-off-title">{detail.oferta}% OFF</span>
 
                                         </div>
@@ -74,7 +74,7 @@ function Purchased({ match }) {
 
                 <div className="checkout__contain-details-total">
 
-                    <h3 className="checkout__contain-details-total-title">Total: {itemOrders.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100)) * value.cantidad), 0)}</h3>
+                    <h3 className="checkout__contain-details-total-title">Total: ${Number(itemOrders.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100)) * value.cantidad), 0).toFixed(1))}</h3>
                     
 
                 </div>
