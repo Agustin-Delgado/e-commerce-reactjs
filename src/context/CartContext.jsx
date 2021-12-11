@@ -6,6 +6,7 @@ export const useCartContext = () => useContext(CartContext)
 const CartContextProvider = ({ children }) => {
 
     const [cartList, setCartList] = useState([])
+    const [checkoutList, setCheckoutList] = useState([])
     const [favList, setFavList] = useState([])
     const [noStockAvaible, setNoStockAvible] = useState(false)
 
@@ -33,6 +34,10 @@ const CartContextProvider = ({ children }) => {
 
     }
 
+    function addToCheckout(items) {
+        setCheckoutList([items])
+    }
+
     function addToFav(items) {
 
         if (favList.find(p => p.id === items.id)) {
@@ -49,7 +54,7 @@ const CartContextProvider = ({ children }) => {
 
     const totalPriceCart = () => {
 
-        return cartList.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100))), 0)
+        return Number(cartList.reduce((sum, value) => (sum + (value.precio - ((value.precio * value.oferta) / 100))* value.cantidad), 0).toFixed(1))
     }
 
     const cartCounter = () => {
@@ -72,7 +77,7 @@ const CartContextProvider = ({ children }) => {
 
     return (
         <>
-            <CartContext.Provider value={{ noStockAvaible, setNoStockAvible, clearCart, cartList, deleteFav, addToCart, addToFav, favList, deleteItem, totalPriceCart, cartCounter, isInFav }}>
+            <CartContext.Provider value={{ noStockAvaible, addToCheckout, checkoutList, setNoStockAvible, clearCart, cartList, deleteFav, addToCart, addToFav, favList, deleteItem, totalPriceCart, cartCounter, isInFav }}>
 
                 {children}
 
