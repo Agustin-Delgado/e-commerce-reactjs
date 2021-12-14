@@ -39,7 +39,7 @@
 
             
 
-            &-card
+            &-dni
             {
                 width: 400px;
                 height: 280px;
@@ -62,70 +62,29 @@
 
                 &-flip 
                 {
-                    transition: 500ms ease-in-out;
+                    transition: 200ms ease-in-out;
                     transform-style: preserve-3d;
                     position: relative;        
                     
-                    &-front, &-back 
+                    &-front
                     {
                         width: 400px;
                         height: 250px;
                         border-radius: 15px;
                         backface-visibility: hidden;
-                        background-image: linear-gradient(45deg, rgba(21,162,203,0.8) 15%, rgba(224,42,255,0.8) 100%);
+                        background: linear-gradient(45deg,#bed2e0,#e0f2ff 80%,#eef8ff);
                         position: absolute;
-                        color: $white;
                         box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
-                    
-                        &::before 
-                        {
-                            content: '';
-                            position: absolute;
-                            width: 100%;
-                            height: 100%;
-                            background-size: cover;
-                            opacity: .05;
-                        }
 
                         &-chip 
                         {
-                            position: absolute;
-                            width: 60px;
-                            height: 45px;
-                            top: 20px;
-                            left: 20px;
-                            background: linear-gradient(135deg, hsl(269,54%,87%) 0%,hsl(200,64%,89%) 44%,hsl(18,55%,94%) 100%);;
-                            border-radius: 8px;
-                    
-                            &::before 
-                            {
-                                content: '';
-                                position: absolute;
-                                top: 0;
-                                bottom: 0;
-                                left: 0;
-                                right: 0;
-                                margin: auto;
-                                border: 4px solid hsla(0, 0, 50, .1);
-                                width: 80%;
-                                height: 70%;
-                                border-radius: 5px;
-                            }
-                        }
-
-                        &-logo 
-                        {
-                            position: absolute;
-                            top: 9px;
-                            right: 20px;
-                            width: 60px;
-                    
-                            svg 
-                            {
-                                width: 100%;
-                                height: auto;
-                                fill: $white;
-                            }
+                            background-image: url(https://http2.mlstatic.com/resources/frontend/buyingflow-frontend-legacy/dist/images/picture-b47309c45d.svg);
+                            position: relative;
+                            background-repeat: no-repeat;
+                            background-size: 5.76923em;
+                            height: 6.15385em;
+                            top: 80px;
+                            left: 40px;
                         }
 
                         &-number 
@@ -137,12 +96,12 @@
                             font-size: 38px;
                         }
 
-                        &-holder, &-expiration
+                        &-holder
                         {
                             position: absolute;
                             margin: 0 auto;
-                            top: 180px;
-                            left: 19px;
+                            top: 76px;
+                            left: 160px;
                             font-size: 22px;
                             text-transform: capitalize;
                         }
@@ -150,57 +109,19 @@
                         &-expiration
                         {
                             text-align: right;
-                            left: auto;
-                            right: 20px;
-                        }
-                    }
-
-                    &-back 
-                    {
-                        transform: rotateY(180deg);
-                    
-                        &-logo 
-                        {
-                            top: 185px;
-                        }
-
-                        &-strip 
-                        {
-                            background: linear-gradient(135deg, hsl(0, 0, 25%), hsl(0, 0, 10%));
-                            position: absolute;
-                            width: 100%;
-                            height: 50px;
-                            top: 30px;
-                            left: 0;
-                        }
-
-                        &-ccv 
-                        {
-                            height: 36px;
-                            background: $white;
-                            width: 91%;
-                            border-radius: 5px;
-                            top: 110px;
-                            left: 0;
-                            right: 0;
+                            left: 15px;
                             position: absolute;
                             margin: 0 auto;
-                            color: $black;
-                            text-align: right;
-                            padding: 10px;
-                        
-                            label 
+                            top: 195px;
+                            font-size: 22px;
+                            text-transform: capitalize;
+
+                            div
                             {
-                                margin: -25px 0 14px;
-                                color: $white;
+                                text-align: center;
                             }
                         }
                     }
-                }
-            
-                &.hover .checkout__contain-content-card-flip 
-                {
-                    transform: rotateY(180deg);
                 }
             }
 

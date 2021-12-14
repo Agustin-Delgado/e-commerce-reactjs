@@ -2,25 +2,37 @@ import { useState } from 'react';
 import { Link } from "react-router-dom";
 import logo from '../img/logoWhite.png';
 import CartWidget from './CartWidget';
+import { getFirestore } from "../services/getFirestore"
 import { useCartContext } from "../context/CartContext"
 
 function NavBar() {
 
     const { favList, deleteFav } = useCartContext()
     const [showCategory, toggleShowCategory] = useState(false)
+    const [showSearch, toggleShowSearch] = useState(false)
     const [showFavs, toggleShowFavs] = useState(false)
     const [searchData, setSearchData] = useState("")
+    const [searchItem, setSearchItem] = useState([])
 
     const handleChange = (e) => {
 
         setSearchData(e.target.value)
+        const db = getFirestore()
+        const dbQuery = db.collection('productos').get()
+        dbQuery
+            .then(resp => setSearchItem(resp.docs.map(prod => prod.data()).filter(prod => prod.nombre.toUpperCase().indexOf(searchData.toUpperCase()) > -1)))
+
+        if (e.target.value === "") {
+            toggleShowSearch(false)
+        }
     }
 
     const search = (e) => {
 
         e.preventDefault()
-        
+
     }
+
 
     return (
 
@@ -34,7 +46,7 @@ function NavBar() {
 
             <form onSubmit={search} onChange={handleChange} className="header__form" action="">
 
-                <input className="header__form-search" placeholder="Buscar productos, marcas y más..." type="text" />
+                <input onChange={() => toggleShowSearch(true)} className="header__form-search" placeholder="Buscar productos, marcas y más..." type="text" />
 
                 <Link to={`/${searchData}`} className="header__form-submit">
 
@@ -44,6 +56,17 @@ function NavBar() {
 
                 </Link>
 
+                {showSearch && <ul onMouseLeave={() => toggleShowSearch(!showSearch)} className='header__form-list'>
+
+                    {searchItem.map(item => (
+                        <Link to={`/${item.nombre}`}><li className='header__form-list-item'><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>{item.nombre}</li></Link>
+                    ))
+                    }
+
+                </ul>
+                }
             </form>
 
             <nav className="header__navbar">
@@ -136,7 +159,7 @@ function NavBar() {
                                                     {
                                                         prod.oferta ?
 
-                                                            <div className="header__navbar-list-item-favoritos-contains-text-off">   
+                                                            <div className="header__navbar-list-item-favoritos-contains-text-off">
 
                                                                 <span className="header__navbar-list-item-favoritos-contains-text-off-price">${prod.precio - ((prod.precio * prod.oferta) / 100)}</span>
                                                                 <span className="header__navbar-list-item-favoritos-contains-text-off-title">{prod.oferta}% OFF</span>

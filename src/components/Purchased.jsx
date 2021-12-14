@@ -11,7 +11,7 @@ function Purchased({ match }) {
         const db = getFirestore()
         const dbQuery = db.collection('orders').doc(order)
         dbQuery.get()
-            .then(resp => (setItemOrders(resp.data().items), setBuyerOrders(resp.data().buyer)))
+            .then(resp => ((setItemOrders(resp.data().items), setBuyerOrders(resp.data().buyer))))
     }, [order])
 
     return <>
