@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom";
-import { getFirestore } from "../services/getFirestore";
+import { useParams } from "react-router-dom"
+import { getFirestore } from "../services/getFirestore"
 import ItemList from "./ItemList"
 
 function ItemListContainer() {

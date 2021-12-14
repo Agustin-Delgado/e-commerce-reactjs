@@ -22,6 +22,7 @@ function ItemDetail({ id, img, precio, descripcion, stock, nombre, oferta }) {
         addToCheckout({ id, img, precio, descripcion, stock, nombre, cantidad, oferta })
     }
 
+
     return <>
 
 
